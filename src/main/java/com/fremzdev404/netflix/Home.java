@@ -14,12 +14,22 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(login.EXTRA_MESSAGE);
+        Intent intent1 = getIntent();
+        String message = intent1.getStringExtra(login.EXTRA_MESSAGE);
+        String message1 = intent1.getStringExtra(login.phone);
+        String message2 = intent1.getStringExtra(login.email);
 
         TextView textView = findViewById(R.id.txtUsername);
         textView.setTextSize(40);
         textView.setText(message);
+
+        TextView textView1 = findViewById(R.id.txtPhone);
+        textView1.setTextSize(40);
+        textView1.setText(message1);
+
+        TextView textView2 = findViewById(R.id.txtEmail);
+        textView2.setTextSize(40);
+        textView2.setText(message2);
     }
 
     public void Signout(View view){

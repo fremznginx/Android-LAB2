@@ -15,6 +15,9 @@ import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class login extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "username";
+    public static final String password = "password";
+    public static final String phone = "phone";
+    public static final String email = "email";
 
     ImageView logo;
     Animation fromtop;
@@ -28,8 +31,15 @@ public class login extends AppCompatActivity {
 
         fromtop = AnimationUtils.loadAnimation(this,R.anim.fromtop);
         logo.setAnimation(fromtop);
+
     }
     public void sendMessage(View view){
+
+        Intent intent = getIntent();
+        String reUsername = intent.getStringExtra(Register.username);
+        String rePassword = intent.getStringExtra(Register.password);
+        String rePhone = intent.getStringExtra(Register.phone);
+        String reEmail = intent.getStringExtra(Register.email);
 
         EditText etUesr = findViewById(R.id.txtUsername);
         EditText etPw = findViewById(R.id.txtPassword);
@@ -37,14 +47,16 @@ public class login extends AppCompatActivity {
         String txtUser = etUesr.getText().toString();
         String txtPw = etPw.getText().toString();
 
-        if (txtUser.equals("mammothz") && txtPw.equals("1234")){
+        if (txtUser.equals(reUsername) && txtPw.equals(rePassword)){
             Toast.makeText(getApplicationContext(),
                     "Welcome back " + txtUser,
                     Toast.LENGTH_LONG).show();
 
-            Intent intent = new Intent(this, Home.class);
-            intent.putExtra(EXTRA_MESSAGE, txtUser);
-            startActivity(intent);
+            Intent intent1 = new Intent(this, Home.class);
+            intent1.putExtra(EXTRA_MESSAGE, txtUser);
+            intent1.putExtra(phone, rePhone);
+            intent1.putExtra(email, reEmail);
+            startActivity(intent1);
 
             etUesr.setText("");
             etPw.setText("");
@@ -57,5 +69,8 @@ public class login extends AppCompatActivity {
 
 
 
+    }
+    public void Register(View view){
+        startActivity(new Intent(login.this, Register.class));
     }
 }
